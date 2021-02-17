@@ -1,0 +1,37 @@
+#LABEL maintainer="newsun87 <newsun87@mail.com.tw>" \
+#      org.label-schema.description="original base imageorderinds/ubuntu-python3.7" 
+#      org.label-schema.base project ="/RBBCar_server" \     
+#      org.label-schema.docker build.cmd=" docker build -t cups_server_base -f Dockerfile_temp ." 
+
+#FROM alwaysai/edgeiq:0.14.0
+#FROM orderinds/ubuntu-python3.7
+#FROM t0rx/rpi-python3.7
+#FROM raspbian/desktop
+#FROM raspbian/jessie
+#FROM raspbian-buster
+#FROM arm32v7/python
+FROM newsun87/youtube-player:v1
+
+ENV LANG C.UTF-8
+RUN apt-get update && apt-get install -y init && apt-get clean all
+#RUN apt-get upgrade
+RUN  apt-get install net-tools \
+     wireless-tools \
+     nano 
+
+RUN pip3 install --upgrade pip \       
+    flask \        
+    requests \
+    paho-mqtt \
+    configparser \
+    pyserial \
+#   firebase-admin \
+    pydrive
+            
+WORKDIR /app 
+COPY . ./
+#ENTRYPOINT ["/bin/bash", "start.sh"]
+CMD [""]
+
+
+
